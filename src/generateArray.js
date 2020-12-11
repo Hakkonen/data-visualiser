@@ -5,10 +5,13 @@ function generateArray(max) {
     let arrayCounter = 0
     while(arrayCounter < max) {
         let newNumber = getRandomInt(45)
-        if(!numberArray.includes(newNumber)) {
-            numberArray.push(newNumber)
-            arrayCounter += 1
-        }
+        // Keeps numbers unique
+        // if(!numberArray.includes(newNumber)) {
+        //     numberArray.push(newNumber)
+        //     arrayCounter += 1
+        // }
+        numberArray.push(newNumber)
+        arrayCounter += 1
     }
     return numberArray
 }

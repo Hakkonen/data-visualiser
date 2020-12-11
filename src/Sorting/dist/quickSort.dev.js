@@ -16,25 +16,8 @@ function quickSort(A, lo, hi) {
     setTimeout(function () {
       var p = (0, _quickSortPartition["default"])(A, lo, hi);
       quickSort(A, lo, p - 1);
-      quickSort(A, p + 1, hi);
-    }, 3500);
-  } else {
-    // Renders final state
-    var finished = false;
-
-    for (var n = 0; n < A.length - 1; n++) {
-      if (A[n] < A[n + 1]) {
-        finished = true;
-      } else {
-        finished = false;
-        break;
-      }
-    }
-
-    if (finished) {
-      // Update HTML array
-      (0, _attachArray["default"])("quick-sort-id", A, "quick-ul");
-    }
+      quickSort(A, p + 1, hi); // attachArray("quick-sort-id", A, "quick-ul")
+    }, 1000);
   }
 }
 

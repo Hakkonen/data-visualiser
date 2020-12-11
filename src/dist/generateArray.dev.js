@@ -14,12 +14,14 @@ function generateArray(max) {
   var arrayCounter = 0;
 
   while (arrayCounter < max) {
-    var newNumber = (0, _getRandomInt["default"])(45);
+    var newNumber = (0, _getRandomInt["default"])(45); // Keeps numbers unique
+    // if(!numberArray.includes(newNumber)) {
+    //     numberArray.push(newNumber)
+    //     arrayCounter += 1
+    // }
 
-    if (!numberArray.includes(newNumber)) {
-      numberArray.push(newNumber);
-      arrayCounter += 1;
-    }
+    numberArray.push(newNumber);
+    arrayCounter += 1;
   }
 
   return numberArray;

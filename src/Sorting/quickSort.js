@@ -7,22 +7,8 @@ function quickSort(A, lo, hi) {
             let p = quickSortPartition(A, lo, hi)
             quickSort(A, lo, p - 1)
             quickSort(A, p + 1, hi)
-        }, 3500);
-    } else {
-        // Renders final state
-        let finished = false
-        for(let n = 0; n < A.length - 1; n++) {
-            if(A[n] < A[n+1]) {
-                finished = true
-            } else {
-                finished = false
-                break
-            }
-        }
-        if(finished) {
-            // Update HTML array
-            attachArray("quick-sort-id", A, "quick-ul")
-        }
+            // attachArray("quick-sort-id", A, "quick-ul")
+        }, 1000);
     }
 }
 
