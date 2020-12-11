@@ -1,32 +1,25 @@
 import generateArray from "./generateArray"
-import attachArray from "./attachArray"
-import quickSort from "./quickSort"
+import attachArray from "./DOM/attachArray"
+import quickSort from "./Sorting/quickSort"
 
 function main() {
     console.log("Main Start")
 
-    // Event listeners
+    // VARIABLE ARRAYS
+    // Quick Sort
+    let quickSortArray = []
+
+    // EVENT LISTENERS
+    // Quick Sort
     document.getElementById("quick-sort-sort-button").addEventListener("click", () => {
-        console.log("Hello jello")
+        quickSort(quickSortArray, 0, (quickSortArray.length)-1)
     })
 
     document.getElementById("quick-sort-reset-button").addEventListener("click", () => {
-        quickSortBox()
+        quickSortArray = generateArray(10)
+        console.log("Unsorted Numbers: ", quickSortArray)
+        attachArray("quick-sort-id", quickSortArray)
     })
-
-    function quickSortBox() {
-        // Generate random array
-        let quickSortBoxArray = generateArray()
-        console.log("Unsorted Numbers: ", quickSortBoxArray)
-
-        // Attach to box
-        attachArray("quick-sort-id", quickSortBoxArray)
-
-        // Sort
-        quickSort(quickSortBoxArray, 0, (quickSortBoxArray.length)-1)
-        console.log(quickSortBoxArray)
-    }
-    quickSortBox()
 
 }
 

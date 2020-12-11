@@ -2,10 +2,10 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/attachArray.js":
-/*!****************************!*
-  !*** ./src/attachArray.js ***!
-  \****************************/
+/***/ "./src/DOM/attachArray.js":
+/*!********************************!*
+  !*** ./src/DOM/attachArray.js ***!
+  \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -18,9 +18,10 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function attachArray(id, array) {
+function attachArray(id, array, name) {
   var div = document.getElementById(id);
   var numberList = document.createElement("ul");
+  numberList.setAttribute("class", name);
 
   var _iterator = _createForOfIteratorHelper(array),
       _step;
@@ -50,6 +51,106 @@ function attachArray(id, array) {
 
 /***/ }),
 
+/***/ "./src/Sorting/quickSort.js":
+/*!**********************************!*
+  !*** ./src/Sorting/quickSort.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _quickSortPartition__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./quickSortPartition */ "./src/Sorting/quickSortPartition.js");
+/* harmony import */ var _DOM_attachArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DOM/attachArray */ "./src/DOM/attachArray.js");
+
+
+
+function quickSort(A, lo, hi) {
+  if (lo < hi) {
+    setTimeout(function () {
+      var p = (0,_quickSortPartition__WEBPACK_IMPORTED_MODULE_0__.default)(A, lo, hi);
+      quickSort(A, lo, p - 1);
+      quickSort(A, p + 1, hi);
+    }, 3500);
+  } else {
+    // Renders final state
+    var finished = false;
+
+    for (var n = 0; n < A.length - 1; n++) {
+      if (A[n] < A[n + 1]) {
+        finished = true;
+      } else {
+        finished = false;
+        break;
+      }
+    }
+
+    if (finished) {
+      // Update HTML array
+      (0,_DOM_attachArray__WEBPACK_IMPORTED_MODULE_1__.default)("quick-sort-id", A, "quick-ul");
+    }
+  }
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (quickSort);
+
+/***/ }),
+
+/***/ "./src/Sorting/quickSortPartition.js":
+/*!*******************************************!*
+  !*** ./src/Sorting/quickSortPartition.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _DOM_attachArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DOM/attachArray */ "./src/DOM/attachArray.js");
+
+
+function quickSortPartition(A, lo, hi) {
+  // Update HTML array
+  (0,_DOM_attachArray__WEBPACK_IMPORTED_MODULE_0__.default)("quick-sort-id", A, "quick-ul"); // Define DOM element for visualiser
+
+  var sortingList = document.getElementsByTagName("ul")[0]; // Pivot pointer := last index of array
+
+  var pivot = A[hi]; // 'i' low pointer := first index of array
+
+  var i = lo; // For length of partition, compare pointer to pivot
+
+  for (var j = lo; j < hi; j++) {
+    if (A[j] < pivot) {
+      // Swap A[i] with A[j]
+      var a = A[i];
+      var b = A[j];
+      A[i] = b;
+      A[j] = a;
+      i += 1; // Change lower than colour
+
+      sortingList.getElementsByTagName("li")[j].style.color = "rgb(10, 132, 255)";
+    }
+  } // Swap A[i] with A[hi]
+
+
+  var c = A[i];
+  var d = A[hi];
+  A[hi] = c;
+  A[i] = d; // Change higher than colour
+
+  sortingList.getElementsByTagName("li")[hi].style.color = "rgb(255, 69, 58)"; // Change pivot colour
+
+  sortingList.getElementsByTagName("li")[i].style.color = "rgb(255, 159, 10)"; // Return last index
+
+  return i;
+} // quickSort(A, 0, length(A) - 1)
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (quickSortPartition);
+
+/***/ }),
+
 /***/ "./src/generateArray.js":
 /*!******************************!*
   !*** ./src/generateArray.js ***!
@@ -63,12 +164,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _getRandomInt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getRandomInt */ "./src/getRandomInt.js");
 
 
-function generateArray() {
+function generateArray(max) {
   var numberArray = [];
   var arrayCounter = 0;
 
-  while (arrayCounter < 10) {
-    var newNumber = (0,_getRandomInt__WEBPACK_IMPORTED_MODULE_0__.default)(20);
+  while (arrayCounter < max) {
+    var newNumber = (0,_getRandomInt__WEBPACK_IMPORTED_MODULE_0__.default)(45);
 
     if (!numberArray.includes(newNumber)) {
       numberArray.push(newNumber);
@@ -109,103 +210,30 @@ function getRandomInt(max) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _generateArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./generateArray */ "./src/generateArray.js");
-/* harmony import */ var _attachArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./attachArray */ "./src/attachArray.js");
-/* harmony import */ var _quickSort__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./quickSort */ "./src/quickSort.js");
+/* harmony import */ var _DOM_attachArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DOM/attachArray */ "./src/DOM/attachArray.js");
+/* harmony import */ var _Sorting_quickSort__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Sorting/quickSort */ "./src/Sorting/quickSort.js");
 
 
 
 
 function main() {
-  console.log("Main Start"); // Event listeners
+  console.log("Main Start"); // VARIABLE ARRAYS
+  // Quick Sort
+
+  var quickSortArray = []; // EVENT LISTENERS
+  // Quick Sort
 
   document.getElementById("quick-sort-sort-button").addEventListener("click", function () {
-    console.log("Hello jello");
+    (0,_Sorting_quickSort__WEBPACK_IMPORTED_MODULE_2__.default)(quickSortArray, 0, quickSortArray.length - 1);
   });
   document.getElementById("quick-sort-reset-button").addEventListener("click", function () {
-    quickSortBox();
+    quickSortArray = (0,_generateArray__WEBPACK_IMPORTED_MODULE_0__.default)(10);
+    console.log("Unsorted Numbers: ", quickSortArray);
+    (0,_DOM_attachArray__WEBPACK_IMPORTED_MODULE_1__.default)("quick-sort-id", quickSortArray);
   });
-
-  function quickSortBox() {
-    // Generate random array
-    var quickSortBoxArray = (0,_generateArray__WEBPACK_IMPORTED_MODULE_0__.default)();
-    console.log("Unsorted Numbers: ", quickSortBoxArray); // Attach to box
-
-    (0,_attachArray__WEBPACK_IMPORTED_MODULE_1__.default)("quick-sort-id", quickSortBoxArray); // Sort
-
-    (0,_quickSort__WEBPACK_IMPORTED_MODULE_2__.default)(quickSortBoxArray, 0, quickSortBoxArray.length - 1);
-    console.log(quickSortBoxArray);
-  }
-
-  quickSortBox();
 }
 
 main();
-
-/***/ }),
-
-/***/ "./src/quickSort.js":
-/*!**************************!*
-  !*** ./src/quickSort.js ***!
-  \**************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _quickSortPartition__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./quickSortPartition */ "./src/quickSortPartition.js");
-
-
-function quickSort(A, lo, hi) {
-  if (lo < hi) {
-    var p = (0,_quickSortPartition__WEBPACK_IMPORTED_MODULE_0__.default)(A, lo, hi);
-    quickSort(A, lo, p - 1);
-    quickSort(A, p + 1, hi);
-  }
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (quickSort);
-
-/***/ }),
-
-/***/ "./src/quickSortPartition.js":
-/*!***********************************!*
-  !*** ./src/quickSortPartition.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-function quickSortPartition(A, lo, hi) {
-  // Pivot pointer := last index of array
-  var pivot = A[hi]; // 'i' low pointer := first index of array
-
-  var i = lo; // For length of partition, compare pointer to pivot
-
-  for (var j = lo; j < hi; j++) {
-    if (A[j] < pivot) {
-      // Swap A[i] with A[j]
-      var a = A[i];
-      var b = A[j];
-      A[i] = b;
-      A[j] = a;
-      i += 1;
-    }
-  } // Swap A[i] with A[hi]
-
-
-  var c = A[i];
-  var d = A[hi];
-  A[hi] = c;
-  A[i] = d; // Return last index
-
-  return i;
-} // quickSort(A, 0, length(A) - 1)
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (quickSortPartition);
 
 /***/ })
 

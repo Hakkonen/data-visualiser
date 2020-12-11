@@ -1,4 +1,12 @@
+import attachArray from "../DOM/attachArray"
+
 function quickSortPartition(A, lo, hi) {
+    // Update HTML array
+    attachArray("quick-sort-id", A, "quick-ul")
+
+    // Define DOM element for visualiser
+    let sortingList = document.getElementsByTagName("ul")[0]
+
     // Pivot pointer := last index of array
     let pivot = A[hi]
     // 'i' low pointer := first index of array
@@ -11,8 +19,11 @@ function quickSortPartition(A, lo, hi) {
             let b = A[j]
             A[i] = b
             A[j] = a
-            
+
             i += 1
+
+            // Change lower than colour
+            sortingList.getElementsByTagName("li")[j].style.color = "rgb(10, 132, 255)"
         }
     }
     // Swap A[i] with A[hi]
@@ -20,6 +31,12 @@ function quickSortPartition(A, lo, hi) {
     let d = A[hi]
     A[hi] = c
     A[i] = d
+
+    // Change higher than colour
+    sortingList.getElementsByTagName("li")[hi].style.color = "rgb(255, 69, 58)"
+
+    // Change pivot colour
+    sortingList.getElementsByTagName("li")[i].style.color = "rgb(255, 159, 10)"
 
     // Return last index
     return i

@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _getRandomInt = _interopRequireDefault(require("./getRandomInt"));
+var _getRandomInt = _interopRequireDefault(require("../getRandomInt"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
