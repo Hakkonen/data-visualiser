@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
+var _attachArray = _interopRequireDefault(require("./attachArray"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 function quickSortPartition(A, lo, hi) {
   // Pivot pointer := last index of array
   var pivot = A[hi]; // 'i' low pointer := first index of array
@@ -26,7 +30,9 @@ function quickSortPartition(A, lo, hi) {
   var c = A[i];
   var d = A[hi];
   A[hi] = c;
-  A[i] = d; // Return last index
+  A[i] = d; // Update HTML array
+
+  (0, _attachArray["default"])("quick-sort-id", A); // Return last index
 
   return i;
 } // quickSort(A, 0, length(A) - 1)

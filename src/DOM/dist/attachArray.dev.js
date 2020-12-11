@@ -5,10 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-function attachArray(id, array) {
+function attachArray(id, array, name) {
   var div = document.getElementById(id);
   var numberList = document.createElement("ul");
-  numberList.setAttribute("id", "quick-ul");
+  numberList.setAttribute("class", name);
   var _iteratorNormalCompletion = true;
   var _didIteratorError = false;
   var _iteratorError = undefined;
